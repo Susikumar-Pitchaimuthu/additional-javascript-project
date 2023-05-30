@@ -101,17 +101,33 @@
       );
       console.log(checkBoxes);
 
+      // Here set the last checked into the variables
+
       let lastChecked;
+
+      // Here creating the function to scratch the input box
       function scratch(e) {
-        let inBetween = false;
+        let inbetween = false;
 
         console.log(e);
 
-        lastChecked = this;
+        if (e.ctrlKey && this.checked) {
+          // go ahead
+          checkBoxes.forEach((checkArea) => {
+            if (checkArea == this || checkArea == lastChecked) {
+              inbetween = !inbetween;
+            }
 
-        console.log(e.shiftKey);
-        console.log(this.checked);
+            if (inbetween) {
+              checkArea.checked = true;
+            }
+          });
+        }
+        // last check
+        lastChecked = this;
       }
+
+      // Here writing the methos to add input function
 
       checkBoxes.forEach((boxes) => boxes.addEventListener("click", scratch));
     </script>
